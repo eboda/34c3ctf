@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+&nbsp;
+<div class="container">
+    <h4>Your Followers</h4>
+    {% if followers|length == 0 %}
+        You are forever alone...
+    {% else %}
+        <table class="table">
+        {% for f in followers %}
+            <tr><td>
+                    <a href="{% url 'feed' %}/{{f.token}}">{{ f.user }}</a>&nbsp;
+                    <a href="{% url 'create_message' %}/{{ f.token }}"><i class="fa fa-envelope"></i></a></td></tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+</div>
+
+{% endblock %}
+

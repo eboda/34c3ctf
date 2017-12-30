@@ -1,0 +1,46 @@
+{% extends 'foobarbaz/base.html' %}
+
+{% block title %}Create Pizza{% endblock %}
+
+{% block content %}
+
+<div class="container foobar img-rounded">
+  <h2>Create new Pizza</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                <label>Pizza name:</label>
+                <input type="text" class="form-control" name="name" placeholder="Pizza Awesome">
+            </div>
+        </div>
+        {% for error in form.name.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                <label>Toppings:</label>
+                <input type="text" class="form-control" name="toppings" placeholder="Cheese, Salami, ...">
+            </div>
+        </div>
+        {% for error in form.toppings.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                <label>Price:</label>
+                <input type="number" class="form-control" name="price" min="0" placeholder="10">
+            </div>
+        </div>
+        {% for error in form.price.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+        <input type='submit' class="btn btn-primary"  value='Save Pizza'>
+        <a href='{% url 'list_pizza' %}' class='btn btn-primary'>Back</a>
+    </form>
+    &nbsp;
+</div>
+
+{% endblock %}
+

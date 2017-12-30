@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container foobar img-rounded">
+    <div class="page-header">
+    <h3>QUAKER - see what's happening. securely!</h3>
+    </div>
+    <div>
+                                <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="form" role="form" action="{% url 'index' %}" method="post" accept-charset="UTF-8" id="login-nav">
+                                                {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="username">Username</label>
+                                                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                        <input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Password" required>
+                                                        <div class="help-block text-right"><a href="javascript:alert('tough luck')">Forgot the password ?</a></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn green lighten-1 btn-block">Sign in</button>
+                                                    </div>
+                                            </form>
+                                        </div>
+                                        <div class="bottom text-center">
+                                            New here ? <a href="{% url 'signup' %}"><b>Join Us</b></a>
+                                        </div>
+                                </div>
+ 
+    </div>
+        &nbsp;
+</div>
+
+{% endblock %}
+

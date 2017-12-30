@@ -1,0 +1,44 @@
+- model: foobarbaz.Pizza
+  pk: 1
+  fields:
+      name: Margherita
+      toppings: Tomato Sauce, Cheese
+      price: 8
+      created_at: '2017-12-01 19:23:32+01:00'
+      user: 1
+
+- model: foobarbaz.Pizza
+  pk: 2
+  fields:
+      name: Salami
+      toppings: Tomato Sauce, Salami, Cheese
+      price: 9
+      created_at: '2017-12-01 19:23:32+01:00'
+      user: 1
+
+- model: foobarbaz.Pizza
+  pk: 3
+  fields:
+      name: Ham
+      toppings: Tomato Sauce, Ham, Cheese
+      price: 9
+      created_at: '2017-12-01 19:23:32+01:00'
+      user: 1
+
+- model: foobarbaz.Pizza
+  pk: 4
+  fields:
+      name: Hawaii
+      toppings: Tomato Sauce, Ham, Pineapple, Cheese
+      price: 13
+      created_at: '2017-12-01 19:23:32+01:00'
+      user: 1
+
+- model: foobarbaz.Pizza
+  pk: 5
+  fields:
+      name: Pizza itanimullI
+      toppings: Annuit coeptis - Novus ordo seclorum
+      price: 1337
+      created_at: '2017-12-01 19:23:32+01:00'
+      user: 1

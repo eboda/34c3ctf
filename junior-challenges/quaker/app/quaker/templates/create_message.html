@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h3>Send message</h3>
+{% if not to %}
+<div class="container">
+    We value the privacy of our users. Therefore you can only message users if you know their token.
+    <form method="POST">
+        <div class="md-form">
+            <input type="text" id="form3" name="token" uclass="form-control" mdbActive>
+            <label for="form3">Recipient token</label>
+        </div>
+    {% csrf_token %}
+    <button class="btn green lighten-1" mdbRippleRadius>Send message</button>
+    </form>
+</div>
+
+<h3>Receive message</h3>
+<div class="container">
+    <p>Your user token: <b>{{ user.profile.token }}</b></p>
+    <p>Share this with users you want to receive messages from!</p>
+</div>
+
+{% else %}
+    <div class="container foobar img-rounded">
+        <form method="POST">
+            <div class="basic-textarea">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <label for="form3">Your message for <b>{{ to }}</b>:</label>
+                <textarea name="message" id="form3" rows=10 class="form-control"></textarea>
+            </div>
+            <div class="text-center">
+                {% csrf_token %}
+                <button class="btn green lighten-1" mdbRippleRadius>Send it! <i class="fa fa-paper-plane ml-1"></i></button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+{% endblock %}
+

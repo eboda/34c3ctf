@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/css/app.css">
+        <script src="/static/js/jquery-3.2.1.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <title>[DEVEL MODE] {% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Cool Pizza shop</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="{% if request.resolver_match.url_name == 'list_pizza' %}active{% endif %}"><a href="{% url 'list_pizza' %}">Pizzas</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.profile.is_illuminati %}
+                    <li style="background-color:red"><a href="{% url 'illuminati' %}">YOU ARE ILLUMINATI CONFIRMED</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>{{ user.get_username }}</strong> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row" style="padding:5px">
+                                        <div class="row">
+                                            <div class="text-center">
+                                                <div class="controls">
+                                                    <b>Your balance:</b>
+                                                    <span class="badge">{{ user.profile.balance }}€</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row text-center">
+                                            <a href="{% url 'list_order' %}"><b>Your orders</b></a>
+                                        </div>
+                                        <div class="row text-center">
+                                            <a href="{% url 'logout' %}"><b>Logout</b></a>
+                                        </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    {% else %}
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Account</b> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="form" role="form" action="{% url 'index' %}" method="post" accept-charset="UTF-8" id="login-nav">
+                                                {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="username">Username</label>
+                                                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                        <input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Password" required>
+                                                        <div class="help-block text-right"><a href="javascript:alert('tough luck')">Forget the password ?</a></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                                    </div>
+                                            </form>
+                                        </div>
+                                        <div class="bottom text-center">
+                                            New here ? <a href="{% url 'signup' %}"><b>Join Us</b></a>
+                                        </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+            </nav>
+            {% if messages %}
+            <div class="container img-rounded alert alert-danger">
+                <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

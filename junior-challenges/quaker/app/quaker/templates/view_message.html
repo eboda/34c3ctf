@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+&nbsp;
+<div class="container">
+    <div class="card green lighten-1">
+        <div class="row">
+            <div class="col-md-6 ">
+                <img src='{{ msg.user_to.profile.profile_pic }}' width='50px'>
+                <b>To:</b>
+                <b><a href="{% url 'feed' %}/{{ msg.user_to.profile.token }}">{{ msg.user_to }}</a></b>
+                <a href="{% url 'create_message' %}/{{ msg.user_to.profile.token }}"><i class="fa fa-envelope"></i></a>
+                {% if msg.seen %}
+                <span class="pull-right">
+                    <small><i class="fa fa-check"></i> msg read by recipient </small>
+                </span>
+                {% endif %}
+
+            </div>
+            <div class="col-md-6 ">
+                <img src='{{ msg.user_from.profile.profile_pic }}' width='50px'>
+                <b>From:</b>
+                <b><a href="{% url 'feed' %}/{{ msg.user_from.profile.token }}">{{ msg.user_from }}</a></b>
+                <a href="{% url 'create_message' %}/{{ msg.user_from.profile.token }}"><i class="fa fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="row white">
+        &nbsp;
+            <div class="col-md-12">{{ msg.message|linebreaks }}</div>
+        </div>
+    </div>
+    &nbsp;
+</div>
+    <a href="{% url 'messages' %}" class="btn green lighten-1">Back</a>
+
+
+{% endblock %}
+

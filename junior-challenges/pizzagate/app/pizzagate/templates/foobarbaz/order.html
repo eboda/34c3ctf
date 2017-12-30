@@ -1,0 +1,19 @@
+{% extends 'foobarbaz/base.html' %}
+
+{% block title %}Create Order{% endblock %}
+
+{% block content %}
+
+<div class="container foobar img-rounded">
+  <h2>Order a new pizza</h2>
+  <form method="post" class="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type='submit' class="btn btn-primary"  value='Create order'>
+    <a href='{% url 'list_order' %}' class='btn btn-primary'>Back</a>
+  </form>
+  &nbsp;
+</div>
+
+{% endblock %}
+

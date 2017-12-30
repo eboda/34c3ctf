@@ -1,0 +1,26 @@
+- model: auth.user
+  pk: 1
+  fields:
+    username: admin
+    password: pbkdf2_sha256$36000$7etkDfmy2kPc$YjAwv9o4S7aoqr7tHmP5QET9+i/+SeaRehjwfFFjuxU=  # awueh23r7Q2hiu1!
+    is_superuser: true
+    is_staff: true
+    is_active: true
+
+
+- model: quaker.UserProfile
+  pk: 1
+  fields:
+    user: 1
+    token: da5eb9f38413743f07e11d63e67650b8
+    profile_pic: /static/img/profile2.png
+    description: I AM THE MASTER OF THE FLAGS!!! MUAHAHA 34C3_pls_n0_steal_th1s_!!!
+    created_at: 2017-12-17T14:15:30.381Z
+    quaks: [1]
+
+        
+- model: quaker.Quak
+  pk: 1
+  fields:
+    message: <b>Merry christmas!</b> Love y'all!
+    created_at: 2017-12-25T14:15:30.381Z

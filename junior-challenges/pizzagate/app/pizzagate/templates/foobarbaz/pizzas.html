@@ -1,0 +1,34 @@
+{% extends 'foobarbaz/base.html' %}
+
+{% block title %}Available Pizzas{% endblock %}
+
+{% block content %}
+
+<div class="container img-rounded foobar" >
+    <h1>Available pizzas:</h1>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <ul>
+            {% for pizza in pizzas %}
+                {% if user.profile.role == 'dev' and pizza.id == 5 %} <!-- {% endif %}
+                <li><b>{{ pizza.name }}</b> - {{ pizza.toppings }} -  {{ pizza.price }}€</li>
+                {% if user.profile.role == 'dev' and pizza.id == 5 %} --> {% endif %}
+            {% endfor %}
+            </ul>
+            <p>That's all we got for the moment! Pizza only! It's just a pizza shop after all, and totally not something else!</p>
+        </div>
+    </div>
+    {% if user.is_authenticated and user.profile.role == 'dev' %}
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <!-- remove this link from live version, quite handy for our developers though at the moment -->
+                <a href="{% url 'create_pizza' %}" class="btn btn-primary pull-right">Create Pizza</a>
+            </div>
+        </div>
+    {% endif %}
+    &nbsp;
+</div>
+
+
+
+{% endblock %}

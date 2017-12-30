@@ -1,0 +1,23 @@
+- model: foobarbaz.Illuminato
+  pk: 1
+  fields:
+      video: YIPqHfnFTpU 
+      details: Shia is illuminati confirmed! You can't ignore the truth! Annuit coeptis
+      created_at: '2017-12-01 19:23:32+01:00'
+      user: 1
+
+- model: foobarbaz.Illuminato
+  pk: 2
+  fields:
+      video: TyH0DyWdGbg
+      details: The Donald is illuminati confirmed! You can't ignore the truth! Annuit coeptis
+      created_at: '2017-12-01 19:23:32+01:00'
+      user: 1
+
+- model: foobarbaz.Illuminato
+  pk: 3
+  fields:
+      video: 50RZrJSC0Cs
+      details: Kim is illuminati confirmed! You can't ignore the truth! Annuit coeptis
+      created_at: '2017-12-01 19:23:32+01:00'
+      user: 1

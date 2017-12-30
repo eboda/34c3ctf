@@ -1,0 +1,18 @@
+- model: auth.user
+  pk: 1
+  fields:
+    username: admin
+    password: pbkdf2_sha256$10000$vkRyq1aioLLj$ry+3xm3YX+ZrSXqri8s3EcXDIrx5ceM+xQjtpLdw2oE=
+    is_superuser: true
+    is_staff: true
+    is_active: true
+
+- model: auth.user
+  pk: 2
+  fields:
+    username: foo 
+    password: pbkdf2_sha256$36000$mwGv6Q332LSH$ec1/78XuvcdeS3TAiHyDL/9DMYKPrjY7np/NUAUpDTY= #bar
+    is_superuser: true
+    is_staff: true
+    is_active: true
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/static/css/app.css">
+        <link rel="stylesheet" href="/static/css/mdb.min.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/font-awesome.css">
+        <title>QUAKER - quaking for the 21st century</title>
+    </head>
+    <body>
+        <nav class="mb-1 navbar navbar-expand-md navbar-light green lighten-1">
+            <a class="navbar-brand" href="/"><img src='/static/img/frog2.png' width='35px'> <b>QUAKER</b> <small>- see what's happening. securely.</small></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% if request.resolver_match.url_name == 'feed' %}active{% endif %}"><a href="{% url 'feed' %}" class="nav-link">{% if not user.is_authenticated %}<i class="fa fa-home"></i>Home{% else %}<i class="fa fa-comments-o"></i>Quaks{% endif %}</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item {% if request.resolver_match.url_name == 'followers' %}active{% endif %}"><a href="{% url 'followers' %}" class="nav-link waves-effect waves-light"><i class="fa fa-group"></i>Followers</a></li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'messages' %}active{% endif %}"><a href="{% url 'messages' %}" class="nav-link waves-effect waves-light"><i class="fa fa-envelope-o"></i>Messages</a></li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}"><a href="{% url 'profile' %}" class="nav-link waves-effect waves-light"><i class="fa fa-id-card-o"></i>Profile</a></li>
+                    <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link waves-effect waves-light"><i class="fa fa-sign-out"></i> </a></li>
+
+                    {% endif %}
+                </ul>
+            </div><!-- /.container-fluid -->
+            </nav>
+            {% if messages %}
+            <div class="container alert alert-danger">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% block content %}
+        {% endblock %}
+        <script src="/static/js/jquery-3.2.1.min.js"></script>
+        <script src="/static/js/app.js"></script>
+        <script src="/static/js/popper.min.js"></script>
+        <script src="/static/js/mdb.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+    </body>
+</html>

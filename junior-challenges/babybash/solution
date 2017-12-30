@@ -1,0 +1,8 @@
+one possible solution:
+
+GF=/GET_FLAG; P=GIMME; Q=PLEASE; ${GF,,} ${P,,}_FLAG_${Q,,}
+
+other possible solution:
+$'\57\147\145\164\137\146\154\141\147' $'\147\151\155\155\145\137\106\114\101\107\137\160\154\145\141\163\145'
+
+I'm sure there are even more  ;-)

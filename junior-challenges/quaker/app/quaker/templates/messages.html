@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <a class="btn btn-success pull-right" href="{% url 'create_message' %}">New Message</a>
+    <br>
+    <h3>Received (Last 5)</h3>
+    {% for m in msg_recv|slice:"5" %}
+        <div class="card">
+            <div class="row">
+                <div class="col-md-2 green lighten-1 border">
+                    <center><img src='{{ m.user_from.profile.profile_pic }}' width='50px'></center>
+                </div>
+                <div class="col-md-2 ">
+                    <b>From:</b> <br>
+                    <b><a href="{% url 'feed' %}/{{ m.user_from.profile.token }}">{{ m.user_from }}</a></b>
+                    <a href="{% url 'create_message' %}/{{ m.user_from.profile.token }}"><i class="fa fa-envelope"></i></a>
+                </div>
+                <div class="col-md-6">{{ m.message|slice:"30" }}...</div>
+                <div class="col-md-2"><a href="{% url 'view_message' m.token %}" class="btn green lighten-1">View</a></div>
+            </div>
+        </div>
+        &nbsp;
+    {% endfor %}
+    &nbsp;
+    <hr>
+
+    <h3>Sent (Last 5)</h3>
+    {% for m in msg_sent|slice:"5" %}
+        <div class="card">
+            <div class="row">
+                <div class="col-md-2 green lighten-1">
+                    <center><img src='{{ m.user_to.profile.profile_pic }}' width='50px'></center>
+                </div>
+                <div class="col-md-2 ">
+                    <b>To:</b> <br>
+                    <b><a href="{% url 'feed' %}/{{ m.user_to.profile.token }}">{{ m.user_to }}</a></b>
+                    <a href="{% url 'create_message' %}/{{ m.user_to.profile.token }}"><i class="fa fa-envelope"></i></a>
+                </div>
+                <div class="col-md-6">{{ m.message|slice:"30" }}...</div>
+                <div class="col-md-2"><a href="{% url 'view_message' m.token %}" class="btn green lighten-1">View</a></div>
+            </div>
+        </div>
+        &nbsp;
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+

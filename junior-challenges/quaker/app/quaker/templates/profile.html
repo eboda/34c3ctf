@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="foobar"><h3>Your profile</h3></div>
+&nbsp;
+<div class="container foobar img-rounded">
+    <form method="POST">
+        <div class="md-form">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input type="text" id="form3" value="{{ user.get_username }}" uclass="form-control" mdbActive readonly>
+            <label for="form3">Your name</label>
+        </div>
+        <div class="md-form">
+            <i class="fa fa-address-card prefix grey-text"></i>
+            <input type="text" id="form3" name="description" value="{{ user.profile.description}}" uclass="form-control" mdbActive>
+            <label for="form3">Your Description</label>
+        </div> 
+            &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;Your profile pic:
+            <div class="form-group" data-toggle="buttons">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                <label class="btn btn-light-green  btn-rounded {% if user.profile.profile_pic == '/static/img/profile1.png' %}active{% endif %} btn-sm">
+                    <input type="radio" name="profile_pic" value="/static/img/profile1.png" autocomplete="off"> <img src="/static/img/profile1.png" width="50px">
+                </label>
+
+                <label class="btn btn-light-green btn-rounded {% if user.profile.profile_pic == '/static/img/profile2.png' %}active{% endif %} btn-sm">
+                    <input type="radio" name="profile_pic" value="/static/img/profile2.png" autocomplete="off"> <img src="/static/img/profile2.png" width="50px">
+                </label>
+
+                <label class="btn btn-light-green btn-rounded {% if user.profile.profile_pic == '/static/img/profile3.png' %}active{% endif %} btn-sm">
+                    <input type="radio" name="profile_pic" value="/static/img/profile3.png" autocomplete="off"> <img src="/static/img/profile3.png" width="50px">
+                </label>
+
+            </div>
+         <div class="text-center">
+             {% csrf_token %}
+            <button class="btn green lighten-1 waves-light" mdbRippleRadius>Save changes <i class="fa fa-floppy-o ml-1"></i></button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+

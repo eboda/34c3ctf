@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="/static/css/app.css">-->
+    <link rel="stylesheet" href="/static/css/illuminati.css">
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/illuminati.js"></script>
+ </head>
+ <body>
+        <center> 
+            <img src="/static/img/illuminati_square.gif" id="the-eye" usemap="#imgmap">
+            <map id="imgmap" name="imgmap">
+                <area shape="circle" id='circle' data-target="#myModalNorm" data-toggle="modal" style="cursor: default">
+            </map>
+        </center>
+    <audio autoplay id="snd" ><source src="/static/audio/illuminati.wav"/> </audio>
+     <div class="container illuminati" id="illu" hidden="true">
+         <div class="row">
+            <div id="myCarousel" class="carousel" data-ride="carousel" data-interval="10000000">
+                <div class="carousel-inner">
+                    {% for c in illuminati %}
+                    <div class="item {% if c.pk == 1 %}active{% endif %} text-center">
+                            <div class="container">
+                                <h4><b>{{ c.details }}</b></h4>
+                            </div>
+                            <iframe width="600" height="400" data-src="https://www.youtube.com/embed/{{ c.video }}?rel=0&amp;controls=0&amp;showinfo=0{% if c.pk == 1 %}&amp;autoplay=1{% endif %}&amp;loop=1&amp;enablejsapi=1" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                            &nbsp;
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <h1>&lsaquo;</h1>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <h1>&rsaquo;</h1>
+                </a>
+            </div>
+        </div>
+     </div>
+     <footer class="footer">
+        <marquee class="illuminati" scrollamount="15">
+            <h2><p>Ultima Cumaei venit iam carminis aetas; Magnus ab integro saeclorum nascitur ordo. iam redit et Virgo, redeunt Saturnia regna, iam nova progenies caelo demittitur alto.</p></h2>
+        </marquee>
+     </footer>
+     <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" 
+                    data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        The Eye demands more Illuminati
+                    </h4>
+                </div>
+                
+                <div class="modal-body">
+                    <form role="form" id="form" method="POST">
+                        {% csrf_token %}
+                    <div class="form-group">
+                        <label for="illuminatiname">Name the Illuminato</label>
+                        <input type="text"  name="details" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="video">Video ID proof</label>
+                        <input type="text" class="form-control" id="video" name="video"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Annult coeptis</button>
+                    </form>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>

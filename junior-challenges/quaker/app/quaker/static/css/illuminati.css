@@ -1,0 +1,36 @@
+.illuminati {
+    color: white;
+    text-shadow: -2px 0 red, 0 2px blue, 2px 0 red, 0 -2px white;
+}
+.footer {
+  position: absolute;
+  bottom:5%;
+  width: 100%;
+  /*background-color: #f5f5f5;*/
+}
+
+body {
+    overflow:hidden;
+    background: url(/static/img/illuminati_square.gif);
+    background-color: red;
+    background-size: cover;
+}
+#video {
+    background-color:transparent;
+}
+
+
+#the-eye {
+    position:absolute;
+    -webkit-animation:spin 30s linear infinite;
+    -moz-animation:spin 30s linear infinite;
+    animation:spin 30s linear infinite;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

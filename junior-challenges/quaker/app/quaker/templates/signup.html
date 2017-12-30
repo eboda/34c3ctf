@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="container alert alert-danger">
+                <strong>{{ field.name }}: {{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+<div class="container foobar img-rounded">
+  <h2>Sign up</h2>
+  <form method="post">
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Username:</label>
+            <input type="text" class="form-control" name="username">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Password:</label>
+            <input type="password" class="form-control" name="password1">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Repeat password:</label>
+            <input type="password" class="form-control" name="password2">
+        </div>
+    </div>
+    {% csrf_token %}
+    <button type="submit" class="btn green lighten-1">Sign up</button>
+  </form>
+  &nbsp;
+</div>
+
+{% endblock %}

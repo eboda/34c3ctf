@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+
+{% block content %}
+&nbsp;
+{% if notfollowing %}
+    <div class="container">
+        <h4>{{ owner }}'s quaks</h4>
+        You are not following {{ owner }} yet. {{ owner }}'s quaks are only visible to his followers.
+        <br><a class="btn green lighten-1" href="{% url 'feed' %}/{{ owner.profile.token }}/follow">Follow {{ owner }}</a>
+    </div>
+
+{% elif listfollowers %}
+    <div class="pull-right">
+        <button type="button" class="btn green lighten-1" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-plus"></i>
+            New quak
+        </button>
+        <a href="{% url 'feed' %}/{{ user.profile.token }}" class="btn green lighten-1">
+            Your Quaks
+        </a>
+    </div>
+
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form method="POST">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Quak</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Your Quak:
+                        <textarea name="story" class="form-control"></textarea>
+                        <small class="pull-right">(max 140 char)</small>
+                        {% csrf_token %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn green lighten-1">Publish</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div> <!-- /modal -->
+
+    <div class="container">
+        <h3>What's happening in your network</h3>
+        {% for f in following %}
+        <div class="atable-responsive-sm">
+            <table class="table table-hover table-striped">
+                <tr>
+                    <td class="td">
+                        <strong><center>{{ f.get_username }}</center></strong>
+                    </td>
+                    <td>
+                        <center>
+                        {% if f.profile.quaks.all|length == 0 %}
+                            No quaks published yet.
+                        {% else %}
+                        <a href="{% url 'feed' %}/{{f.profile.token}}">{{ f.profile.quaks.all|length }} published quaks</a> !
+                        {% endif %}
+                        </center>
+                    </td>
+                    <td class="td">
+                        <center>
+                        <a href="{% url 'create_message' %}/{{f.profile.token}}"><i class="fa fa-envelope"></i></a>
+                        </center>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </div>
+        &nbsp;
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="container">
+        <h4>{{ owner }}'s quaks</h4>
+        &nbsp;
+        {% if owner.profile.quaks.all|length == 0 %} 
+            No quaks published yet.
+        {% else %}
+            {% for t in owner.profile.quaks.all %}
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-2 green lighten-1">
+                            <small>{{ t.created_at }}</small>
+                        </div>
+                        <div class="col-md-8">{{ t.message|xss_filter|safe }}</div>
+                    </div>
+                </div>
+                &nbsp;
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}
+
+{% endblock %}
+
