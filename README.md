@@ -4,7 +4,7 @@ Challenges:
 
 * minbashmaxfun - misc 
 * urlstorage - web 
-* extract0r - web
+* extract0r - web  - [Writeup](extract0r/README.md)
 
 Junior Challenges:
 * cyberms - crypto
